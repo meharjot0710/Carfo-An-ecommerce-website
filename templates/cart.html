@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carfo</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/img/logo.jpg" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="static/js/script.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .cart {
+            border: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .remove-btn {
+            background-color: #ff3333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .total {
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        .checkout-btn {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #1c1208;">
+        <div class="container">
+            <a class="navbar-brand" href="http://localhost:5000/home"><img src="static/assets/img/logo.jpg"
+                    alt="..." /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <h4 style="color: white;">Welcome, {{ username }}!</h4>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/shop">Shop Now</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/cart">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <h1><br></h1>
+    </header>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+        </div>
+        <div id="total"></div>
+    </section>
+    <form id="paymentForm" action="http://localhost:5000/generate_receipt" method="post" style="display: none;">
+        <input type="hidden" name="cartData" id="cartData">
+    </form>
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="text-center"><button onclick="makePayment()">Make Payment</button></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/script.js"></script>
+    <script>
+        sum = 0;
+        function addToCart(productData) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItem = cart.find(item => item.productId === productData.productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    productId: productData.productId.productPrice,
+                    quantity: 1,
+                    image: productData.image,
+                    name: productData.name,
+                    price: productData.price
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+        function updateCartDisplay() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsElement = document.getElementById('cart-items');
+            cartItemsElement.innerHTML = '';
+            cart.forEach(item => {
+                let itemElement = document.createElement('div');
+                itemElement.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="item-details">
+            <p>${item.name} - Quantity: ${item.quantity} - Price: ${item.price}</p>
+        </div>`;
+                cartItemsElement.appendChild(itemElement);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCartDisplay();
+        });
+        function increaseQuantity(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let index = cart.findIndex(item => item.productId === productId);
+            if (index !== -1) {
+                cart[index].quantity++;
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            }
+        }
+        function decreaseQuantity(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let index = cart.findIndex(item => item.productId === productId);
+            if (index !== -1 && cart[index].quantity > 1) {
+                cart[index].quantity--;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            }
+        }
+        function removeItem(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let index = cart.findIndex(item => item.productId === productId);
+            if (index !== -1) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+                if (cart.length === 0) {
+                    let totalElement = document.getElementById('total');
+                    totalElement.innerHTML = `<br><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Total Price: 0`;
+                }
+            }
+        }
+        function updateCartDisplay() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsElement = document.getElementById('cart-items');
+            cartItemsElement.innerHTML = '';
+            cart.forEach(item => {
+                sum = item.price * item.quantity;
+                let itemElement = document.createElement('div');
+                itemElement.innerHTML = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <p>${item.name} - <p>Quantity: 
+                                <button class="quantity-btn" onclick="decreaseQuantity('${item.productId}')">-</button>
+                                ${item.quantity}
+                                <button class="quantity-btn" onclick="increaseQuantity('${item.productId}')">+</button></p>
+                                <p> Price: ${item.price * item.quantity}</p>
+                            </p>
+                            <button class="remove-btn" onclick="removeItem('${item.productId}')">Remove</button>
+                        </div>
+                    </div>`;
+                total();
+                cartItemsElement.appendChild(itemElement);
+            });
+        }
+        function total() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalPrice = 0;
+            cart.forEach(item => {
+                totalPrice += item.price * item.quantity;
+            });
+            let totalElement = document.getElementById('total');
+            totalElement.innerHTML = `<br><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Total Price: ${totalPrice}`;
+        }
+        function makePayment() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartDataInput = document.getElementById('cartData');
+            cartDataInput.value = JSON.stringify(cart);
+            document.getElementById('paymentForm').submit();
+            localStorage.removeItem('cart');
+            updateCartDisplay();
+            total();
+            alert('Your order has been placed.');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            updateCartDisplay();
+            total();
+        });
+    </script>
+</body>
+
+</html>

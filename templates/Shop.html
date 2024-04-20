@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link href="static/css/styl.css" rel="stylesheet" />
+    <script src="static/js/script.js"></script>
+    <link href="static\css\styl.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styl.css') }}">
+    <title>Carfo</title>
+    <script src="static/js/script.js"></script>
+    <link rel="icon" type="image/x-icon" href="static/assets/img/logo.jpg" />
+    <link href="css/styl.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="C:\Users\mehmu\OneDrive\Desktop\Webdev project\static\css\styles.css">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 12px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            z-index: 9999;
+            animation: fadeOut 3s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .popup-message {
+            font-size: 18px;
+            color: rgb(196, 195, 195);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #1c1208;">
+        <div class="container">
+            <a class="navbar-brand" href="http://localhost:5000/home"><img src="static/assets/img/logo.jpg"
+                    alt="..." /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <h4 style="color: white;">Welcome, {{ username }}!</h4>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/shop">Shop Now</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/cart">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Carfo</h1>
+                <p class="lead fw-normal text-white-50 mb-0">One stop for all your car needs</p>
+            </div>
+        </div>
+    </header>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100" id="product1">
+                        <img class="card-img-top" src="static/assets/img/portfolio/1.jpg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+
+                                <h5 class="fw-bolder">Involve Perfume</h5>
+                                299
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Involve Perfume added to cart!');addToCart({productId: 'Involve Perfume', image: 'static/assets/img/portfolio/1.jpg', name: 'Involve Perfume', price: 299});">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product2">
+                    <div class="card h-100">
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
+                        <img class="card-img-top" src="static/assets/img/portfolio/22.jpeg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Star Alloys (15')</h5>
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <span class="text-muted text-decoration-line-through">40999</span>
+                                35999
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Star Alloys added to cart!');addToCart({productId: 'Star Alloys', image: 'static/assets/img/portfolio/22.jpeg', name: 'Star Alloys', price: 35999})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product3">
+                    <div class="card h-100">
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
+                        <img class="card-img-top" src="static/assets/img/portfolio/33.jpeg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Window Garnish</h5>
+                                <span class="text-muted text-decoration-line-through">3599</span>
+                                2599
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Window Garnish added to cart!');addToCart({productId: 'Window Garnish', image: 'static/assets/img/portfolio/33.jpeg', name: 'Window Garnish', price: 3599})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="static/assets/img/portfolio/44.jpeg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Chrome Door Handles</h5>
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                1999
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Chrome Door Handles added to cart!');addToCart({productId: 'Chrome Door Handles', image: 'static/assets/img/portfolio/44.jpeg', name: 'Chrome Door Handles', price: 1999})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product5">
+                    <div class="card h-100">
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
+                        <img class="card-img-top" src="static/assets/img/portfolio/55.jpg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Incrabus Alloys (18')</h5>
+                                <span class="text-muted text-decoration-line-through">89999</span>
+                                79999
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Incrabus Alloys added to cart!');addToCart({productId: 'Incrabus Alloys', image: 'static/assets/img/portfolio/55.jpg', name: 'Incrabus Alloys', price: 79999})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product6">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="static/assets/img/portfolio/66.jpg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Speakers (Set of 2)</h5>
+                                5999
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Speakers added to cart!');addToCart({productId: 'Speakers', image: 'static/assets/img/portfolio/66.jpg', name: 'Speakers', price: 5999})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product7">
+                    <div class="card h-100">
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
+                        </div>
+                        <img class="card-img-top" src="static/assets/img/portfolio/77.jpg" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Ambient Lights</h5>
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <span class="text-muted text-decoration-line-through">6999</span>
+                                5999
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('Ambient Lights added to cart!');addToCart({productId: 'Ambient Lights', image: 'static/assets/img/portfolio/77.jpg', name: 'Ambient Lights', price: 5999})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5" id="product8">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="static/assets/img/portfolio/88.png" alt="..." />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">LED Lights</h5>
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                7999
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><button
+                                    onclick="alert('LED Lights added to cart!');addToCart({productId: 'LED Lights', image: 'static/assets/img/portfolio/88.png', name: 'LED Lights', price: 7999})">Add
+                                    to cart</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="popup-message">Your message goes here</div>
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Carfo</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/script.js"></script>
+    <script>
+        function addToCart(productData) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItem = cart.find(item => item.productId === productData.productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    productId: productData.productId,
+                    quantity: 1,
+                    image: productData.image,
+                    name: productData.name,
+                    price: productData.price
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+            alert('Your order has been placed.');
+        }
+        function updateCartDisplay() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsElement = document.getElementById('cart-items');
+            cartItemsElement.innerHTML = '';
+            cart.forEach(item => {
+                let itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item');
+                itemElement.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="item-details">
+            <p>${item.name} - Quantity: ${item.quantity} - Price: ${item.price}</p>
+        </div>`;
+                cartItemsElement.appendChild(itemElement);
+                alert('Your order has been placed.');
+            });
+        }
+    </script>
+</body>
+</html>

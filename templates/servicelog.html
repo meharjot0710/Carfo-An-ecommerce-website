@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <title>Carfo</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/img/logo.jpg" />
+    <link rel="stylesheet" href="C:\Users\mehmu\OneDrive\Desktop\Webdev project\static\css\styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="static/css/showcase-text.css" rel="stylesheet" />
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #1c1208;">
+        <div class="container">
+            <a class="navbar-brand" href="http://localhost:5000/"><img src="static/assets/img/logo.jpg"
+                    alt="..." /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:5000/servicelog">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:5000/contactlog">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:5000/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:5000/signup">SignUp</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="bg-dark py-5" style="background-color: #1c1208;">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Carfo</h1>
+                <p class="lead fw-normal text-white-50 mb-0">We offer the best services for you</p>
+            </div>
+        </div>
+    </header>
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-money-bill fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <h3>Budget</h3>
+                        <p class="lead mb-0">We will guide the best car on the basis of your budget.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-car fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <h3>Segment</h3>
+                        <p class="lead mb-0">We will guide the best car on the basis of the segment you want to drive.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h3>Car Dealerships</h3>
+                        <p class="lead mb-0">We will provide you with the contacts of the nearest dealerships of your
+                            desired car.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="text-center">
+        <h2 class="section-heading text-uppercase">By Budget</h2>
+        <h3 class="section-subheading text-muted">Under 10 lakh</h3>
+    </div>
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <img class="col-lg-6 text-white showcase-img " style="display: flex;" src="static\assets\img\portfolio\Sonet.jpg" alt="..." />
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2 style="align-self: flex-end;">Kia Sonet</h2>
+                </div>
+            </div>
+            <div class="row g-0">
+                <img class="col-lg-6 order-lg-2 text-white showcase-img " src="static\assets\img\portfolio\venue.jpeg" alt="..." />
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>Hyundai Venue</h2>
+                </div>
+            </div>
+            <div class="row g-0">
+                <img class="col-lg-6 text-white showcase-img " style="display: flex;" src="static\assets\img\portfolio\breeza.jpg" alt="..." />
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2 style="align-self: flex-end;">Maruti Breeza</h2>
+                </div>
+            </div>
+            <div class="row g-0">
+                <img class="col-lg-6 order-lg-2 text-white showcase-img " src="static\assets\img\portfolio\baleno.jpeg" alt="..." />
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>Maruti baleno</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Carfo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+</html>

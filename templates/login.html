@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carfo</title>
+    <link rel="icon" type="image/x-icon" href="static/assets/img/logo.jpg" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10.5rem;
+            padding-bottom: 6rem;
+            text-align: center;
+            color: sandybrown;
+            background-image: url("static/assets/img/header-bg.jpg");
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: center center;
+            background-size: cover;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #1c1208;">
+        <div class="container">
+            <a class="navbar-brand" href="http://localhost:5000/"><img src="static/assets/img/logo.jpg" alt="..." style="mix-blend-mode: color-burn;"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/serviceslog">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/contactlog">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://localhost:5000/signup">SignUp</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="login-container masthead">
+        <h2>Login to Carfo</h2>
+        <form class="login-form" action="http://localhost:5000/redirected_page" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="button" id="togglePassword">Toggle Password</button>
+            </div>
+            <div id="passwordLengthMsg"></div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const passwordInput = document.getElementById('password');
+            const togglePasswordBtn = document.getElementById('asswordLengthMsg');
+            const passwordLengthMsg = document.getElementById('passwordLengthMsg');
+            if (passwordInput && togglePasswordBtn) {
+                togglePasswordBtn.addEventListener('click', function () {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                });
+                passwordInput.addEventListener('input', function () {
+                    const password = passwordInput.value;
+                    const isLengthValid = password.length >= 8;
+                    if (passwordLengthMsg) {
+                        passwordLengthMsg.textContent = isLengthValid ? 'Password length is valid' : 'Password must be at least 8 characters';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
